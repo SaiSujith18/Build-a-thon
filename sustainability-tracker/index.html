@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability Action Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login/Register Section -->
+    <div id="auth-section" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>🌱 Sustainability Tracker</h1>
+                <p>Track your eco-friendly actions and make a difference!</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-username" class="form-label">Username</label>
+                    <input type="text" id="login-username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" id="login-submit" class="btn btn--primary btn--full-width">Login</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="register-username" class="form-label">Username</label>
+                    <input type="text" id="register-username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email" class="form-label">Email</label>
+                    <input type="email" id="register-email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password" class="form-label">Password</label>
+                    <input type="password" id="register-password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" id="register-submit" class="btn btn--primary btn--full-width">Register</button>
+            </form>
+
+            <div id="auth-error" class="error-message" role="alert"></div>
+            
+            <!-- Demo Account Info -->
+            <div class="demo-info">
+                <p><strong>Demo Account:</strong></p>
+                <p>Username: EcoWarrior | Password: eco123</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="dashboard-container hidden">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="user-profile">
+                    <h2 id="user-name">Welcome!</h2>
+                    <div class="user-stats">
+                        <span class="stat-item">
+                            <span class="stat-value" id="user-points">0</span>
+                            <span class="stat-label">Points</span>
+                        </span>
+                        <span class="stat-item">
+                            <span class="stat-value" id="user-streak">0</span>
+                            <span class="stat-label">Day Streak</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <button id="theme-toggle" class="btn btn--outline" aria-label="Toggle theme">🌙</button>
+                    <button id="logout-btn" class="btn btn--secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="dashboard-grid">
+                <!-- Action Logging Form -->
+                <section class="card action-form-card">
+                    <div class="card__body">
+                        <h3>Log New Action</h3>
+                        <form id="action-form">
+                            <div class="form-group">
+                                <label for="action-category" class="form-label">Category</label>
+                                <select id="action-category" name="category" class="form-control" required>
+                                    <option value="">Select a category</option>
+                                    <option value="transport">🚲 Transport</option>
+                                    <option value="energy">⚡ Energy</option>
+                                    <option value="waste">♻️ Waste</option>
+                                    <option value="water">💧 Water</option>
+                                    <option value="food">🥗 Food</option>
+                                    <option value="other">🌍 Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="action-description" class="form-label">Description</label>
+                                <input type="text" id="action-description" name="description" class="form-control" placeholder="What did you do?" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="action-points" class="form-label">Points (1-10)</label>
+                                <input type="number" id="action-points" name="points" class="form-control" min="1" max="10" value="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="action-photo" class="form-label">Photo (optional)</label>
+                                <input type="file" id="action-photo" name="photo" class="form-control" accept="image/*">
+                            </div>
+                            <div class="form-group">
+                                <label for="action-notes" class="form-label">Notes (optional)</label>
+                                <textarea id="action-notes" name="notes" class="form-control" rows="3" placeholder="Additional details..."></textarea>
+                            </div>
+                            <button type="submit" id="action-submit" class="btn btn--primary btn--full-width">Log Action</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Stats Dashboard -->
+                <section class="card stats-card">
+                    <div class="card__body">
+                        <h3>Your Progress</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <div class="stat-icon">🔥</div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="streak-display">0</span>
+                                    <span class="stat-text">Day Streak</span>
+                                </div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-icon">⭐</div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="total-points">0</span>
+                                    <span class="stat-text">Total Points</span>
+                                </div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-icon">📋</div>
+                                <div class="stat-content">
+                                    <span class="stat-number" id="total-actions">0</span>
+                                    <span class="stat-text">Actions Logged</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievements-section">
+                            <h4>Achievements</h4>
+                            <div id="achievements-container" class="achievements-grid">
+                                <!-- Achievement badges will be populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Eco Tips Carousel -->
+                <section class="card tips-card">
+                    <div class="card__body">
+                        <h3>Eco Tips</h3>
+                        <div class="tips-carousel">
+                            <button class="carousel-btn carousel-btn--prev" aria-label="Previous tip">‹</button>
+                            <div class="tips-container" id="tips-container">
+                                <!-- Tips will be populated by JS -->
+                            </div>
+                            <button class="carousel-btn carousel-btn--next" aria-label="Next tip">›</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Leaderboard -->
+                <section class="card leaderboard-card">
+                    <div class="card__body">
+                        <h3>Leaderboard</h3>
+                        <div id="leaderboard-container" class="leaderboard-list">
+                            <!-- Leaderboard entries will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Challenges -->
+                <section class="card challenges-card">
+                    <div class="card__body">
+                        <h3>Challenges</h3>
+                        <div id="challenges-container" class="challenges-grid">
+                            <!-- Challenges will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Social Sharing -->
+                <section class="card social-card">
+                    <div class="card__body">
+                        <h3>Share Your Progress</h3>
+                        <div class="social-buttons">
+                            <button id="share-achievement" class="btn btn--primary">Share Achievement</button>
+                            <button id="copy-link" class="btn btn--outline">Copy Link</button>
+                            <button id="export-data" class="btn btn--secondary">Export Data</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Actions -->
+                <section class="card recent-actions-card">
+                    <div class="card__body">
+                        <h3>Recent Actions</h3>
+                        <div id="recent-actions-container" class="recent-actions-list">
+                            <!-- Recent actions will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast hidden" role="status" aria-live="polite">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="modal hidden" role="dialog" aria-labelledby="share-modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="share-modal-title">Share Your Achievement</h3>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="share-text">I've earned <span id="share-points">0</span> points and maintained a <span id="share-streak">0</span> day streak on my sustainability journey! 🌱</p>
+                <div class="share-options">
+                    <button id="share-native" class="btn btn--primary">Share</button>
+                    <button id="share-copy" class="btn btn--outline">Copy Text</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <footer>&copy;Binary Brain's</footer>
+</body>
+</html>
